@@ -4,7 +4,7 @@
 #
 Name     : jmespath
 Version  : 0.9.0
-Release  : 1
+Release  : 2
 URL      : https://pypi.python.org/packages/source/j/jmespath/jmespath-0.9.0.tar.gz
 Source0  : https://pypi.python.org/packages/source/j/jmespath/jmespath-0.9.0.tar.gz
 Summary  : JSON Matching Expressions
