@@ -4,7 +4,7 @@
 #
 Name     : jmespath
 Version  : 0.9.3
-Release  : 18
+Release  : 19
 URL      : http://pypi.debian.net/jmespath/jmespath-0.9.3.tar.gz
 Source0  : http://pypi.debian.net/jmespath/jmespath-0.9.3.tar.gz
 Summary  : JSON Matching Expressions
