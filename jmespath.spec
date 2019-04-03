@@ -4,43 +4,31 @@
 #
 Name     : jmespath
 Version  : 0.9.3
-Release  : 33
+Release  : 34
 URL      : http://pypi.debian.net/jmespath/jmespath-0.9.3.tar.gz
 Source0  : http://pypi.debian.net/jmespath/jmespath-0.9.3.tar.gz
 Summary  : JSON Matching Expressions
 Group    : Development/Tools
 License  : MIT
-Requires: jmespath-bin
-Requires: jmespath-python3
-Requires: jmespath-license
-Requires: jmespath-python
-BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python-core
-BuildRequires : python3-core
-BuildRequires : python3-dev
-BuildRequires : setuptools
-BuildRequires : setuptools-legacypython
+Requires: jmespath-bin = %{version}-%{release}
+Requires: jmespath-license = %{version}-%{release}
+Requires: jmespath-python = %{version}-%{release}
+Requires: jmespath-python3 = %{version}-%{release}
+BuildRequires : buildreq-distutils3
 
 %description
+JMESPath
 ========
+.. image:: https://badges.gitter.im/Join Chat.svg
+:target: https://gitter.im/jmespath/chat
 
 %package bin
 Summary: bin components for the jmespath package.
 Group: Binaries
-Requires: jmespath-license
+Requires: jmespath-license = %{version}-%{release}
 
 %description bin
 bin components for the jmespath package.
-
-
-%package legacypython
-Summary: legacypython components for the jmespath package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the jmespath package.
 
 
 %package license
@@ -54,7 +42,7 @@ license components for the jmespath package.
 %package python
 Summary: python components for the jmespath package.
 Group: Default
-Requires: jmespath-python3
+Requires: jmespath-python3 = %{version}-%{release}
 
 %description python
 python components for the jmespath package.
@@ -77,17 +65,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530372696
-python2 setup.py build -b py2
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1554321579
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
-export SOURCE_DATE_EPOCH=1530372696
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/jmespath
-cp LICENSE.txt %{buildroot}/usr/share/doc/jmespath/LICENSE.txt
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/package-licenses/jmespath
+cp LICENSE.txt %{buildroot}/usr/share/package-licenses/jmespath/LICENSE.txt
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -99,13 +86,9 @@ echo ----[ mark ]----
 %defattr(-,root,root,-)
 /usr/bin/jp.py
 
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
-
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/jmespath/LICENSE.txt
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/jmespath/LICENSE.txt
 
 %files python
 %defattr(-,root,root,-)
