@@ -1,6 +1,7 @@
 # This file contains recursive sources that require this package
 awscli
+azure-cli-core
 boto3
 botocore
+knack
 mercurial
-openstacksdk
